@@ -1,6 +1,8 @@
 import Formulario from "./Formulario"
 import Card from 'react-bootstrap/Card';
 import SocialButtons from './SocialButtons';
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
@@ -12,7 +14,7 @@ const Registro = () => {
             <Card.Title>Crea una cuenta</Card.Title>
 
             <SocialButtons 
-            face ={<FontAwesomeIcon icon={faFacebook} />}
+            face={<FontAwesomeIcon icon={faFacebook} />}
             github={<FontAwesomeIcon icon={faGithub} />} 
             linkedin={<FontAwesomeIcon icon={faLinkedin} />}
             />

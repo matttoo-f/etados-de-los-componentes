@@ -1,71 +1,70 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import AlertValidation from './AlertValidation';
 
 function Formulario() {
+  const [Name, setName] = useState('');
+  const [Email, setEmail] = useState('');
+  const [Pass, setPass] = useState('');
+  const [PassVerify, setPassVerify] = useState('');
+  const [Error, setError] = useState(false);
+  const [PassMatchError, setPassMatchError] = useState(false);
+  const [Success, setSuccess] = useState(false);
 
-  const [Name, setName] = useState('')
-  const [Email, setEmail] = useState('')
-  const [Pass, setPass] = useState('')
-  const [PassVerify, setPassVerify] = useState('')
-  const [Error, setError] = useState(false)
-  const [ErrorMsg, setErrorMsg] = useState('')
+  const ChangeName = evento => {
+    setName(evento.target.value);
+    setError(false); 
+  };
 
-  const ChangeName = (event)=> {
-    setName(event.target.value)
-  }
+  const ChangeEmail = evento => {
+    setEmail(evento.target.value);
+    setError(false); 
+  };
 
-  const ChangeEmail = (event)=> {
-    const email = event.target.value
-    setEmail(email)
-    
-    if (email.includes('@')){
-      setError(false)
-      setErrorMsg('')
-    }else {
-      setError(true)
-      setErrorMsg('El correo debe contener @')
+  const ChangePass = evento => {
+    setPass(evento.target.value);
+    setError(false); 
+  };
+
+  const ChangeVerify = evento => {
+    setPassVerify(evento.target.value);
+    setError(false);
+  };
+
+  const Validation = evento => {
+    evento.preventDefault();
+
+    if (Name === "" || Email === "" || Pass === "" || PassVerify === "") {
+      setError(true); 
+      setSuccess(false); 
+      return;
     }
-  }
 
-  const ChangePass = (event)=> {
-    setPass(event.target.value)
-  }
+    if (Pass !== PassVerify) {
+      setPassMatchError(true); 
+      setSuccess(false);
+      return;
+    }
 
-  const ChangeVerify = (event)=> {
-    setPassVerify(event.target.value)
-  }
-  const Validation = (event)=>{
-     event.preventDefault()
+  
+    setError(false);
+    setPassMatchError(false); 
+    setSuccess(true);
 
-     if(!Name || !Email || !Pass || !PassVerify){
-      setError(true)
-      setErrorMsg('Por favor, completa todos los campos.')
-     }else if (Pass !== PassVerify){
-      setError(true)
-      setErrorMsg('Las contraseñas no coinciden')
-     }else {
-      setError(false)
-      setErrorMsg('¡Registro Exitoso!')
-     }
-
-  }
+  };
 
   return (
     <>
       <Form onSubmit={Validation}>
         <Form.Control type="text" placeholder="Nombre" onChange={ChangeName} />
-        <Form.Control type="text" placeholder="tuemail@ejemplo.com" onChange={ChangeEmail} />
-        <Form.Control type="text" placeholder="Contraseña" onChange={ChangePass} />
-        <Form.Control type="text" placeholder="Verificar contraseña" onChange={ChangeVerify} />
-        <Button type="submit" variant="success">
-          Registrarse
-        </Button>{' '}
-        {Error && <AlertValidation variant="danger">{ErrorMsg}</AlertValidation>}
+        <Form.Control type="email" placeholder="tuemail@ejemplo.com" onChange={ChangeEmail} />
+        <Form.Control type="password" placeholder="Contraseña" onChange={ChangePass} />
+        <Form.Control type="password" placeholder="Verificar contraseña" onChange={ChangeVerify} />
+        <Button type="submit" variant="success">Registrarse</Button>{' '}
+        {(Error || PassMatchError) && <AlertValidation variant="danger">¡Error! Verifica los campos.</AlertValidation>}
+        {Success && <AlertValidation variant="success" success={true} />}
       </Form>
-
     </>
   );
 }

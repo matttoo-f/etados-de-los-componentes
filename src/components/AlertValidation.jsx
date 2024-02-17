@@ -1,15 +1,11 @@
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
 
+const AlertValidation = ({ variant, success }) => {
+  return (
+    <Alert key={variant} variant={variant}>
+      {success ? '¡Registro exitoso!' : '¡Error! Verifica los campos.'}
+    </Alert>
+  );
+};
 
-const AlertValidation = ({variant}) => {
-    
-
-    return (
-        <>
-        <Alert key={variant} variant={variant}>
-          debes llenar todos los campos
-        </Alert>
-        </>
-    )
-}
-export default AlertValidation
+export default AlertValidation;
