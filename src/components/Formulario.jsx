@@ -11,39 +11,59 @@ function Formulario() {
   const [Pass, setPass] = useState('')
   const [PassVerify, setPassVerify] = useState('')
   const [Error, setError] = useState(false)
+  const [ErrorMsg, setErrorMsg] = useState('')
 
-  const ChangeName = (evento)=> {
-    setName(evento.target.value)
+  const ChangeName = (event)=> {
+    setName(event.target.value)
   }
 
-  const ChangeEmail = (evento)=> {
-    setEmail(evento.target.value)
-  }
-
-  const ChangePass = (evento)=> {
-    setPass(evento.target.value)
-  }
-
-  const ChangeVerify = (evento)=> {
-    setPassVerify(evento.target.value)
-  }
-  const Validation = (evento)=>{
-     evento.preventDefault()
-
-     if (Name || Email || Pass || PassVerify === ""){
+  const ChangeEmail = (event)=> {
+    const email = event.target.value
+    setEmail(email)
+    
+    if (email.includes('@')){
+      setError(false)
+      setErrorMsg('')
+    }else {
       setError(true)
+      setErrorMsg('El correo debe contener @')
+    }
+  }
+
+  const ChangePass = (event)=> {
+    setPass(event.target.value)
+  }
+
+  const ChangeVerify = (event)=> {
+    setPassVerify(event.target.value)
+  }
+  const Validation = (event)=>{
+     event.preventDefault()
+
+     if(!Name || !Email || !Pass || !PassVerify){
+      setError(true)
+      setErrorMsg('Por favor, completa todos los campos.')
+     }else if (Pass !== PassVerify){
+      setError(true)
+      setErrorMsg('Las contraseñas no coinciden')
+     }else {
+      setError(false)
+      setErrorMsg('¡Registro Exitoso!')
      }
+
   }
 
   return (
     <>
       <Form onSubmit={Validation}>
-        <input type="text" placeholder='Nombre' onChange={ChangeName} />
-        <input type="text" placeholder='tuemail@ejemplo.com' onChange={ChangeEmail} />
-        <input type="text" placeholder='Contraseña' onChange={ChangePass} />
-        <input type="text" placeholder='Verificar contraseña' onChange={ChangeVerify} />
-        <Button  type='submit' variant="success">Registrarse</Button>{' '}
-        {Error ? <AlertValidation variant = 'danger'/> : null }
+        <Form.Control type="text" placeholder="Nombre" onChange={ChangeName} />
+        <Form.Control type="text" placeholder="tuemail@ejemplo.com" onChange={ChangeEmail} />
+        <Form.Control type="text" placeholder="Contraseña" onChange={ChangePass} />
+        <Form.Control type="text" placeholder="Verificar contraseña" onChange={ChangeVerify} />
+        <Button type="submit" variant="success">
+          Registrarse
+        </Button>{' '}
+        {Error && <AlertValidation variant="danger">{ErrorMsg}</AlertValidation>}
       </Form>
 
     </>
