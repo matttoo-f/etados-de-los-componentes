@@ -2,6 +2,7 @@ import Formulario from "./Formulario"
 import Card from 'react-bootstrap/Card';
 import SocialButtons from './SocialButtons';
 import { Container } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,7 +22,7 @@ const Registro = () => {
             linkedin={<FontAwesomeIcon icon={faLinkedin} />}
             />
 
-            <Card.Subtitle className="mb-2 text-body">
+            <Card.Subtitle className="text-primary">
                 O usa tu email para registrarte
             </Card.Subtitle>
 
