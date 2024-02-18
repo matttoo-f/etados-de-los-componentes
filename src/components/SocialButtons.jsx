@@ -6,7 +6,7 @@ const SocialButtons = ({face, github, linkedin}) => {
 
     return (
        <> 
-        <Container>
+        <Container className="icons">
             <a href="">{face}</a>
             <a href="">{github}</a>
             <a href="">{linkedin}</a>

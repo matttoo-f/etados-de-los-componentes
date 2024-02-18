@@ -1,6 +1,7 @@
 import Formulario from "./Formulario"
 import Card from 'react-bootstrap/Card';
 import SocialButtons from './SocialButtons';
+import { Container } from 'react-bootstrap'
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,17 +10,18 @@ import { faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-i
 const Registro = () => {
 
     return (
-        <Card style={{ width: '18rem' }} className='formulario'>
-        <Card.Body >
+       <Container className="container-card d-flex justify-content-center align-items-center">
+         <Card style={{ width: '18rem' }}>
+        <Card.Body className='d-flex flex-column jystify-content-center align-items-center' >
             <Card.Title>Crea una cuenta</Card.Title>
 
-            <SocialButtons 
+            <SocialButtons  
             face={<FontAwesomeIcon icon={faFacebook} />}
             github={<FontAwesomeIcon icon={faGithub} />} 
             linkedin={<FontAwesomeIcon icon={faLinkedin} />}
             />
 
-            <Card.Subtitle className="mb-2 text-muted">
+            <Card.Subtitle className="mb-2 text-body">
                 O usa tu email para registrarte
             </Card.Subtitle>
 
@@ -27,6 +29,7 @@ const Registro = () => {
             
         </Card.Body>
         </Card>
+       </Container>
     )
 }
 export default Registro
