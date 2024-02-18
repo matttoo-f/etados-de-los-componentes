@@ -22,7 +22,7 @@ const Registro = () => {
             linkedin={<FontAwesomeIcon icon={faLinkedin} />}
             />
 
-            <Card.Subtitle className="text-primary">
+            <Card.Subtitle className="mb-2 text-primary">
                 O usa tu email para registrarte
             </Card.Subtitle>
 
